@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Rafeef OS · Rafeef Thamer Al-Tuka</title>
+<title>CopyStation · Rafeef Thamer Al-Tuka</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Manrope:wght@400;500;700&family=Noto+Kufi+Arabic:wght@500;800&display=swap" rel="stylesheet">
@@ -52,12 +52,22 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .mark span{display:inline-block;opacity:0;transform:translateY(30px) scale(.8);filter:blur(10px)}
 #boot.on .mark span{animation:letter .9s cubic-bezier(.2,.9,.2,1) forwards}
 @keyframes letter{to{opacity:1;transform:none;filter:none}}
-.mark .os{color:var(--amber)}
+.logo{display:flex;flex-direction:column;align-items:center;font-family:"Unbounded","Arial Black",sans-serif;font-weight:800;line-height:.9;position:relative;z-index:1}
+.cw{display:flex;align-items:center;font-size:clamp(52px,13vw,136px);letter-spacing:-.03em;color:#fff;min-height:1em}
+.cw .caret{display:inline-block;width:.09em;height:.8em;background:var(--amber);margin-inline-start:.07em;animation:blink 1s steps(1) infinite;box-shadow:0 0 18px rgba(255,181,71,.7)}
+@keyframes blink{50%{opacity:0}}
+.st{position:relative;font-kerning:none;font-feature-settings:'kern' 0;white-space:nowrap;font-size:clamp(17px,4.3vw,46px);letter-spacing:.5em;margin-inline-end:-.5em;margin-top:.35em;color:transparent;-webkit-text-stroke:1.2px rgba(255,255,255,.75)}
+.st i{font-style:normal;display:inline-block;opacity:0;transform:translateY(.4em);filter:blur(6px)}
+#boot.on .st i{animation:letter .7s cubic-bezier(.2,.9,.2,1) forwards}
+.st::after{content:attr(data-t);position:absolute;inset:0;-webkit-text-stroke:0;color:transparent;background:linear-gradient(90deg,#ffb547,#ff6fa8 35%,#59e0ff 70%,#ffb547);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;clip-path:inset(0 100% 0 0)}
+#boot.on .st::after{animation:fillIn .9s 1.9s cubic-bezier(.65,0,.35,1) forwards,shimmer 3s 2.8s linear infinite}
+@keyframes fillIn{to{clip-path:inset(0 0 0 0)}}
+@keyframes shimmer{to{background-position:-200% 0}}
 .sweep{position:absolute;inset:0;background:linear-gradient(100deg,transparent 40%,rgba(255,181,71,.25) 50%,transparent 60%);transform:translateX(-100%);pointer-events:none}
-#boot.on .sweep{animation:sweep 1.6s 1.3s ease-in-out forwards}
+#boot.on .sweep{animation:sweep 1.4s 2.3s ease-in-out forwards}
 @keyframes sweep{to{transform:translateX(100%)}}
 .boot-sub{margin-top:22px;color:var(--muted);opacity:0;font-size:15px}
-#boot.on .boot-sub{animation:fade .6s 1.8s forwards}
+#boot.on .boot-sub{animation:fade .6s 2.5s forwards}
 @keyframes fade{to{opacity:1}}
 
 /* ---------- profiles ---------- */
@@ -262,6 +272,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 :root[dir="rtl"] .flipx{transform:scaleX(-1)}
 .lang-btn{min-width:40px;height:40px;border-radius:999px;background:var(--glass);font-weight:800;font-size:14px;padding:0 12px;font-family:var(--body)}
 .lang-btn:hover{background:var(--glass-2)}
+.prof-sys{position:absolute;top:calc(env(safe-area-inset-top,0px) + 18px);inset-inline-end:18px;display:flex;gap:8px;align-items:center}
 .lang-float{position:absolute;top:calc(env(safe-area-inset-top,0px) + 18px);inset-inline-end:18px}
 #profiles{position:fixed}
 .pname.full{max-width:220px;line-height:1.25}
@@ -453,13 +464,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 </section>
 
 <section id="boot" class="screen" aria-label="Starting up" dir="ltr">
-  <div class="mark" aria-label="Rafeef OS" style="font-family:'Unbounded','Arial Black',sans-serif"><span>R</span><span>A</span><span>F</span><span>E</span><span>E</span><span>F</span><span class="os">&nbsp;OS</span></div>
+  <div class="logo" aria-label="CopyStation"><div class="cw"><span id="typed"></span><span class="caret"></span></div><div class="st" data-t="STATION"><i>S</i><i>T</i><i>A</i><i>T</i><i>I</i><i>O</i><i>N</i></div></div>
   <div class="boot-sub" data-s="bootSub"></div>
   <div class="sweep"></div>
 </section>
 
 <section id="profiles" class="screen" aria-label="Choose a profile">
-  <button class="lang-btn lang-float" data-lang-toggle aria-label="Switch language">ع</button>
+  <div class="prof-sys"><button class="lang-btn" data-lang-toggle aria-label="Switch language">ع</button><button class="icon-btn" data-sound aria-label="Mute sounds"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg></button><button class="icon-btn" data-off aria-label="Turn off"><svg viewBox="0 0 24 24"><path d="M12 3v8"/><path d="M6.3 6.6a8 8 0 1 0 11.4 0"/></svg></button></div>
   <h1 data-s="who"></h1>
   <div class="plist">
     <button class="pcard" id="meCard">
@@ -481,8 +492,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     <div class="me"><div class="avatar" aria-hidden="true">R</div><span data-s="first"></span></div>
     <div class="sys">
       <button class="lang-btn" data-lang-toggle aria-label="Switch language">ع</button>
-      <button class="icon-btn" id="soundBtn" aria-label="Mute sounds"><svg viewBox="0 0 24 24" id="soundIc"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg></button>
-      <button class="icon-btn" id="powerOff" aria-label="Turn off"><svg viewBox="0 0 24 24"><path d="M12 3v8"/><path d="M6.3 6.6a8 8 0 1 0 11.4 0"/></svg></button>
+      <button class="icon-btn" id="soundBtn" data-sound aria-label="Mute sounds"><svg viewBox="0 0 24 24" id="soundIc"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg></button>
+      <button class="icon-btn" id="powerOff" data-off aria-label="Turn off"><svg viewBox="0 0 24 24"><path d="M12 3v8"/><path d="M6.3 6.6a8 8 0 1 0 11.4 0"/></svg></button>
       <span id="clock" dir="ltr"></span>
     </div>
   </header>
@@ -628,7 +639,14 @@ const SFX=(()=>{let ctx,muted=false;
   move(){tone(1300,0,.05,'sine',.025)},
   select(){tone(660,0,.12,'triangle',.06);tone(990,.06,.2,'sine',.05)},
   back(){tone(520,0,.1,'triangle',.05);tone(350,.06,.16,'sine',.04)},
-  achieve(){[784,988,1175,1568].forEach((f,i)=>tone(f,i*.08,.5,'sine',.045))}}})();
+  achieve(){[784,988,1175,1568].forEach((f,i)=>tone(f,i*.08,.5,'sine',.045))},
+  type(){if(muted)return;const a=c();if(!a)return;const t=a.currentTime;
+   const n=Math.floor(a.sampleRate*.06),b=a.createBuffer(1,n,a.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,6);
+   const src=a.createBufferSource(),hp=a.createBiquadFilter(),v=a.createGain();src.buffer=b;src.playbackRate.value=.8+Math.random()*.2;hp.type='lowpass';hp.frequency.value=1100+Math.random()*250;hp.Q.value=.5;v.gain.value=.22;src.connect(hp).connect(v).connect(a.destination);src.start(t);
+   const o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.setValueAtTime(120+Math.random()*20,t);o.frequency.exponentialRampToValueAtTime(55,t+.09);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.09,t+.008);g.gain.exponentialRampToValueAtTime(.0001,t+.11);o.connect(g).connect(a.destination);o.start(t);o.stop(t+.13);
+   const n2=Math.floor(a.sampleRate*.02),b2=a.createBuffer(1,n2,a.sampleRate),d2=b2.getChannelData(0);for(let i=0;i<n2;i++)d2[i]=(Math.random()*2-1)*Math.pow(1-i/n2,4);
+   const s2=a.createBufferSource(),f2=a.createBiquadFilter(),v2=a.createGain();s2.buffer=b2;f2.type='lowpass';f2.frequency.value=700;v2.gain.value=.12;s2.connect(f2).connect(v2).connect(a.destination);s2.start(t+.045)},
+  ding(){tone(784,0,1.2,'sine',.022);tone(1568,0,.5,'sine',.005)}}})();
 
 /* ---------- content ---------- */
 const ICONS={
@@ -776,14 +794,15 @@ document.querySelectorAll('[data-lang-toggle]').forEach(b=>b.onclick=toggleLang)
 
 /* ---------- flow ---------- */
 function powerOn(){if(state!=='power')return;SFX.power();show('boot');setTimeout(()=>SFX.boot(),250);
- document.querySelectorAll('.mark span').forEach((x,i)=>x.style.animationDelay=(.15+i*.09)+'s');
- setTimeout(()=>{show('profiles');$('#meCard').focus()},3600)}
+ document.querySelectorAll('.st i').forEach((x,i)=>x.style.animationDelay=(1+i*.08)+'s');
+ const ty=$('#typed');ty.textContent='';'COPY'.split('').forEach((ch,i)=>setTimeout(()=>{ty.textContent+=ch;SFX.type();if(i===3)setTimeout(()=>SFX.ding(),220)},280+i*170));
+ setTimeout(()=>{show('profiles');$('#meCard').focus()},4100)}
 function signIn(){if(state!=='profiles')return;SFX.select();$('#meCard').classList.add('sel');$('#signing').textContent=s('signing');
  setTimeout(()=>{$('#meCard').classList.remove('sel');$('#signing').textContent='';show('dash');buildTiles();focusTile(0,true);toast(s('welcome'),s('signedIn'),'👋')},1300)}
 $('#pwrBtn').onclick=powerOn;$('#meCard').onclick=signIn;
 $('#guestCard').onclick=()=>{SFX.back();$('#signing').textContent=s('guestLocked')};
-$('#powerOff').onclick=()=>{SFX.back();closeModal();show('power');$('#pwrBtn').focus()};
-$('#soundBtn').onclick=()=>{const m=SFX.toggle();$('#soundBtn').setAttribute('aria-label',m?'Turn sounds on':'Mute sounds');$('#soundIc').innerHTML=m?'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l5 6M22 9l-5 6"/>':'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/>'};
+document.querySelectorAll('[data-off]').forEach(b=>b.onclick=()=>{SFX.back();closeModal();$('#meCard').classList.remove('sel');$('#signing').textContent='';show('power');$('#pwrBtn').focus()});
+document.querySelectorAll('[data-sound]').forEach(b=>b.onclick=()=>{const m=SFX.toggle();document.querySelectorAll('[data-sound]').forEach(x=>{x.setAttribute('aria-label',m?'Turn sounds on':'Mute sounds');x.querySelector('svg').innerHTML=m?'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l5 6M22 9l-5 6"/>':'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/>'});if(!m)SFX.select()});
 
 /* ---------- dashboard ---------- */
 function buildTiles(){const el=$('#tiles');if(el.children.length)return;
@@ -915,13 +934,13 @@ const HG=((HOOK)=>{const ROOT=document.getElementById('hg');let ACTIVE=false;
 /* ================= text ================= */
 let LANG='en';try{LANG=localStorage.getItem('rafeef-os-lang')||'en'}catch(e){}
 const S={
- en:{kicker:'Rafeef OS · Mini game',title:'Hire Ground',tagline:'Make it across the job market. Chase the rising dollar, dodge HR, and whatever you do, stay out of unemployment.',
+ en:{kicker:'CopyStation · Mini game',title:'Hire Ground',tagline:'Make it across the job market. Chase the rising dollar, dodge HR, and whatever you do, stay out of unemployment.',
   play:'Start crossing',again:'Try again',gameOver:'Game over',steps:'Steps',best:'Best $',dollars:'Dollars',bestLbl:'Best $',newBest:'New personal best!',nameLbl:'Your name',nameHint:'For the leaderboard. Scores are ranked by dollars collected.',namePh:'Type your name',board:'Leaderboard',boardSub:'Ranked by dollars collected',me:'RAFEEF',meNote:'I made this so I get first place',empty:'No scores yet. Collect dollars to climb.',placedT:n=>'You made the leaderboard! Place #'+n,anon:'PLAYER',exit:'Back to console',
   ctrlKeys:'Arrow keys or WASD to hop',ctrlTouch:'Tap to hop forward · Swipe to move',
   lg:[['$','#2bb36a','Dollars','Collect as many as you can.'],['HR','#3b4a8f','HR, revisions & meetings','Moving hazards. Get out of the way.'],['~','#556b7d','Unemployment','Deep water and puddles. Never step in.'],['✎','#d9c9a0','Contracts','Ride them across unemployment.'],['!','#e2445c','Deadlines','When the light flashes, the deadline is coming.'],['⌛','#8a3a52','Burnout','The bottom of the screen keeps creeping up. Stand still too long and it catches you.']],
   d:{hr:['HR got you','"We\'ll keep your CV on file."'],rev:['Run over by revisions','FINAL_v7_really_final.pdf'],meet:['Stuck in a meeting','This could have been an email.'],water:['Fell into unemployment','Should have grabbed that contract.'],puddle:['Stepped in unemployment','Watch your step out there.'],drift:['Drifted out of the market','Some contracts take you too far.'],train:['Hit by the deadline','It was due yesterday.'],burnout:['Burnout caught up','Keep moving forward.']},
   lane:{water:'UNEMPLOYMENT'},obj:{rev:'REVISIONS',meet:'MEETING',train:'DEADLINE',contract:'CONTRACT'}},
- ar:{kicker:'Rafeef OS · لعبة صغيرة',title:'أرض التوظيف',tagline:'اعبر سوق العمل. لاحق الدولار الصاعد، وتجنّب الـHR، والأهم لا توقع بالبطالة.',
+ ar:{kicker:'CopyStation · لعبة صغيرة',title:'أرض التوظيف',tagline:'اعبر سوق العمل. لاحق الدولار الصاعد، وتجنّب الـHR، والأهم لا توقع بالبطالة.',
   play:'ابدأ العبور',again:'حاول مرة ثانية',gameOver:'انتهت اللعبة',steps:'خطوات',best:'أفضل $',dollars:'دولارات',bestLbl:'أفضل $',newBest:'رقم قياسي جديد!',nameLbl:'اسمك',nameHint:'للوحة الصدارة. الترتيب حسب عدد الدولارات اللي تجمعها.',namePh:'اكتب اسمك',board:'لوحة الصدارة',boardSub:'الترتيب حسب الدولارات',me:'رفيف',meNote:'آني سويتها حتى آخذ المركز الأول',empty:'ماكو نتائج بعد. اجمع دولارات حتى تصعد.',placedT:n=>'دخلت لوحة الصدارة! المركز #'+n,anon:'لاعب',exit:'رجوع للواجهة',
   ctrlKeys:'الأسهم أو WASD للقفز',ctrlTouch:'اضغط للقفز للأمام · اسحب للتحرك',
   lg:[['$','#2bb36a','الدولار','اجمع أكثر ما تكدر.'],['HR','#3b4a8f','الـHR والتعديلات والاجتماعات','عوائق متحركة. ابتعد عن طريقها.'],['~','#556b7d','البطالة','مياه عميقة وحفر. لا تدوس بيها.'],['✎','#d9c9a0','العقود','اركب عليها حتى تعبر البطالة.'],['!','#e2445c','الديدلاين','لما يومض الضوء، الديدلاين جاي.'],['⌛','#8a3a52','الاحتراق الوظيفي','أسفل الشاشة يزحف للأعلى. إذا وقفت هواية بمكانك يلحكك.']],
